@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A browser-based dungeon loot splitter that tracks treasure and divides its value among party members.">
+    <meta name="author" content="Shyliah Heads">
+    <title>Dungeon Loot Splitter</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
+</head>
+<body>
+
+    <header>
+        <h1>Dungeon Loot Splitter</h1>
+        <p>Keep track of the treasures collected on your adventure and split the rewards.</p>
+    </header>
+
+    <main>
+
+        <!-- Party Setup -->
+        <section class="panel" aria-labelledby="party-heading">
+            <h2 id="party-heading">Party Setup</h2>
+
+            <div class="form-group">
+                <label for="partySize">Number of Party Members:</label>
+                <input type="number" id="partySize" min="1" step="1"
+                    placeholder="Example: 4">
+            </div>
+
+            <p id="partyMessage" class="message" role="status" aria-live="polite"></p>
+        </section>
+
+        <!-- Add Loot -->
+        <section class="panel" aria-labelledby="add-heading">
+            <h2 id="add-heading">Add Loot</h2>
+
+            <div class="form-group">
+                <label for="lootName">Loot Name:</label>
+                <input type="text" id="lootName"
+                    placeholder="Example: Golden Crown">
+            </div>
+
+            <div class="form-group">
+                <label for="lootValue">Loot Value:</label>
+                <input type="number" id="lootValue" min="0" step="0.01"
+                    placeholder="Example: 125.50">
+            </div>
+
+            <button type="button" id="addLoot">Add Loot</button>
+
+            <p id="message" class="message" role="status" aria-live="polite"></p>
+        </section>
+
+        <!-- Loot List -->
+        <section class="panel" aria-labelledby="list-heading">
+            <h2 id="list-heading">Loot List</h2>
+
+            <ul id="lootList">
+                <li>No loot has been added yet.</li>
+            </ul>
+
+            <p id="totalValue" class="total-value">
+                Total Loot: $0.00
+            </p>
+        </section>
+
+        <!-- Split Loot -->
+        <section class="panel" aria-labelledby="split-heading">
+            <h2 id="split-heading">Split Loot</h2>
+
+            <p>Divide the collected treasure evenly among your party.</p>
+
+            <button type="button" id="splitLoot">Split Loot</button>
+
+            <p id="splitTotal" class="result-line">
+                Total Loot: $0.00
+            </p>
+
+            <p id="lootPerMember" class="result-line">
+                Loot Per Party Member: $0.00
+            </p>
+
+            <p id="splitMessage" class="message" role="status" aria-live="polite"></p>
+        </section>
+
+        <!-- Logic Explanation -->
+        <section class="panel reflection" aria-labelledby="logic-heading">
+            <h2 id="logic-heading">Logic Explanation</h2>
+
+            <p>
+                The application stores the loot in an array named
+                <code>lootItems</code>. Each time a valid item is added,
+                JavaScript creates an object with a <code>name</code>
+                property and a <code>value</code> property, then adds
+                that object to the array with <code>push()</code>.
+            </p>
+
+            <p>
+                A traditional indexed <code>for</code> loop goes through
+                the array to calculate the total value. A second loop
+                displays every loot object in the Loot List. The
+                <code>if</code> statements check that the loot name and
+                value are valid before an item is added. Before splitting,
+                another set of conditions checks that the party size is
+                a whole number of at least 1 and that the array contains loot.
+            </p>
+
+            <p>
+                Event listeners wait for the Add Loot and Split Loot buttons.
+                When a button is clicked, its function runs and updates the
+                page. The array stays in memory while the page is open, so
+                the user does not need to reload or save the list.
+            </p>
+
+            <figure class="flow-figure">
+                <img src="images/logic-flow.png"
+                    alt="Logic flow sketch showing loot validation, adding loot to the array, calculating the total, checking party size, and splitting loot.">
+                <figcaption>
+                    Logic flow sketch for the Dungeon Loot Splitter.
+                </figcaption>
+            </figure>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>DEV 109 - Dungeon Loot Splitter: Phase 1</p>
+    </footer>
+
+</body>
+</html>
